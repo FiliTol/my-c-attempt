@@ -1,3 +1,3 @@
 # my-c-attempt
 
-Archive of exercises taken from the book "C Programming" by Dennis Ritchie and Brian Kernighan
+Archive of exercises taken from the book "The C Programming language" by Ritchie and Kernighan
