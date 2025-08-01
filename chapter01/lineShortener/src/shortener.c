@@ -17,12 +17,13 @@
  * Note that inserting newline characters is a quicker solution to the linesArray
  * issue implemented in the detabber program*/
 
-void copy(char currentLine[], char linesArray[MAXLENGTHLINE]);
-
 int main(){
-    int c, index, finalLineLength;
+    int c, index;
+    char toFind, toInsert;
+    toFind = ' ';
+    toInsert = '\n';
     char currentLine[MAXLENGTHLINE];
-    char linesArray[MAXLENGTHLINE];
+    char lineToPrint[MAXLENGTHLINE];
 
     index = 0;      /*Character counter. Reset after new line is hit*/
     
@@ -30,28 +31,13 @@ int main(){
         currentLine[index] = c;
         ++index;
     }
-
     currentLine[index] = '\0';
-    copy(currentLine, linesArray);
-    linesArray[index] = '\n';
-
-    finalLineLength = strlen(linesArray);
-    linesArray[finalLineLength] = '\0';
+    for (index = 0; index < strlen(currentLine); ++index) {
+        copyReplaceCharacter(currentLine, lineToPrint, index, toFind, toInsert);
+    }
 
     printf("--------------------------------------------------\n");
-    printf("Lines:\n%s", linesArray);
+    printf("Lines:\n%s", lineToPrint);
     return 0;
-}
-
-/* Creates a copy of character array into an another array
- * Index is provided as argument*/
-
-void copy(char currentLine[], char linesArray[MAXLENGTHLINE]) {
-    int index;
-    index = 0;
-    while (currentLine[index] != '\0'){
-        linesArray[index] = currentLine[index];
-        ++index;
-    };
 }
 
