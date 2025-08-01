@@ -2,7 +2,7 @@
 #include <string.h>
 #define IN 1
 #define OUT 0
-#define TABSPACES 4
+#define TABSPACES 8
 #define MAXLINE 1000
 #define NMAXLINES 10
 
@@ -28,6 +28,7 @@ int main(){
     
     while((c = getchar()) != EOF){
         if (c == '\n' || llen == MAXLINE) {
+            line[i] = '\0';
             copy(i, lc, line, linesArray);
             ++lc;
             i = llen = 0;
@@ -51,13 +52,13 @@ int main(){
 
 void copy(int i, int lc, char currentLine[], char linesArray[][MAXLINE]) {
     int cnt = 0;
-    char detabbedLine[MAXLINE];
-    while (cnt < i){
-        detabString(currentLine, detabbedLine);
+    char detabbedLine[MAXLINE] = {0};
+    detabString(currentLine, detabbedLine);
+    while (detabbedLine[cnt] != '\0'){
         linesArray[lc][cnt] = detabbedLine[cnt];
         ++cnt;
     };
-    linesArray[lc][i+1] = '\0';
+    linesArray[lc][cnt] = '\0';
 }
 
 void detabString(char currentLine[], char detabbedLine[]) {
@@ -67,22 +68,23 @@ void detabString(char currentLine[], char detabbedLine[]) {
      * and substitute to the tab spaces (4-remainder spaces)
      * Substituting means adding these spaces to the final string instead
      * of the tab character*/
-    int i, destinationIndex = 0;
-    char spacesArray[MAXLINE];
+    int i, destinationIndex;
+    i = destinationIndex = 0;
+    char spacesArray[MAXLINE] = {0};
     while (i < strlen(currentLine)) {
         if (currentLine[i] == '\t') {
-            int n_spaces = (i - 1 + TABSPACES) % TABSPACES;
+            int n_spaces = TABSPACES - (destinationIndex % TABSPACES);
             char space = ' ';
             repeatCharacter(n_spaces, space, spacesArray);
             attachStrings(detabbedLine, spacesArray);
-            /*detabbedLine[destinationIndex] = spacesArray;*/
             destinationIndex = destinationIndex + n_spaces;
         } else {
-            detabbedLine[i] = currentLine[i];
+            detabbedLine[destinationIndex] = currentLine[i];
             ++destinationIndex;
         }
         ++i;
     }
+    detabbedLine[destinationIndex] = '\0';
 }
 
 void repeatCharacter(int n, char character, char charactersArray[MAXLINE]) {
@@ -92,15 +94,19 @@ void repeatCharacter(int n, char character, char charactersArray[MAXLINE]) {
         charactersArray[i] = character;
         ++i;
     }
+    charactersArray[i] = '\0';
 }
 
 void attachStrings(char leftString[MAXLINE], char rightString[MAXLINE]){
-    int i, finalStringLen;
+    int i, leftStringLen, rightStringLen;
     i = 0;
-    finalStringLen = strlen(leftString);
-    while (i < strlen(rightString)) {
-        leftString[finalStringLen] = rightString[i];
+    leftStringLen = strlen(leftString);
+    rightStringLen = strlen(rightString);
+    while (i < rightStringLen) {
+        leftString[leftStringLen] = rightString[i];
         ++i;
+        ++leftStringLen;
     }
+    //leftString[i] = '\0';
 }
 
