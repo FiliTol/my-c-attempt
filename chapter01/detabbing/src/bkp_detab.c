@@ -107,6 +107,5 @@ void attachStrings(char leftString[MAXLINE], char rightString[MAXLINE]){
         ++i;
         ++leftStringLen;
     }
-    //leftString[i] = '\0';
 }
 
