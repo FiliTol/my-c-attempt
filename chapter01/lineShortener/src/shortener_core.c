@@ -89,4 +89,3 @@ void generateArrayOfOccurrences(
         occurrencesArray[counter] = findLastOccurrence(multiples[counter], charToFind, stringToSearch);
     }
 }
-

@@ -18,14 +18,11 @@
  * issue implemented in the detabber program*/
 
 int main(){
-    int c, index;
-    char toFind, toInsert;
-    toFind = ' ';
-    toInsert = '\n';
+    int c;
     char currentLine[MAXLENGTHLINE];
     char lineToPrint[MAXLENGTHLINE];
 
-    index = 0;      /*Character counter. Reset after new line is hit*/
+    int index = 0;      /*Character counter. Reset after new line is hit*/
     
     while((c = getchar()) != EOF){
         currentLine[index] = c;
@@ -33,11 +30,13 @@ int main(){
     }
     currentLine[index] = '\0';
     for (index = 0; index < strlen(currentLine); ++index) {
+        const char toInsert = '\n';
+        const char toFind = ' ';
         copyReplaceCharacter(currentLine, lineToPrint, index, toFind, toInsert);
     }
 
     printf("--------------------------------------------------\n");
-    printf("Lines:\n%s", lineToPrint);
+    printf("%s", lineToPrint);
     return 0;
 }
 
