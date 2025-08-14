@@ -3,11 +3,12 @@
 int isEven(int n);
 int timesEight(int n);
 int bitValue(int n_th, int n);
+int binaryTableMultiplication(unsigned int u, unsigned int d);
 int nTimesM(int n, int m);
 
 int main(){
     // printf("%d\n", isEven(345679));
-    printf("%d\n", timesEight(5));
+    printf("%d\n", nTimesM(15, 345671));
     return 0;
 }
 
@@ -22,13 +23,20 @@ int timesEight(int n) {
 }
 
 //// Generalize multiplication operation by using bitwise operators
-// Extract value of specific bit
-int bitValue(unsigned int n_th, unsigned int n) {
-    unsigned int mask = 1 << n_th;
-    return (n & mask) >> n_th;
+/// The following method is called Russian Peasant algorithm
+int nTimesM(int n, int m) {
+    if (n == 0 || m == 0) {
+        return 0;
+    } else {
+        int result = 0;
+        while (m > 0) {
+            if (m & 1) {
+                result += n;
+            }
+            n <<= 1;
+            m >>= 1;
+        }
+        return result;
+    }
 }
 
-// Generalize multiplication using bitwise operations
-int nTimesM(int n, int m) {
-    return 0;
-}
