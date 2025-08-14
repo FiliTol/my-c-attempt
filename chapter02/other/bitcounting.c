@@ -9,6 +9,8 @@ int main(void) {
 }
 
 // Count how many 1 bits are there in a provided input
+// Note that declaring an unsigned argument explicitly will ensure that, when shifting
+// to the right, each empty space will be filled with zeros instead of sign bits.
 int bitCount(unsigned x) {
     int b = 0;
     while (x != 0){
