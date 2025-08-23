@@ -13,6 +13,28 @@ int main(void) {
 }
 
 
+// int binarySearch(int value, int int_array[], int array_size)
+// {
+// 	/*This finds the size of the array in bytes and divides by the number of bytes that each element in the array uses */
+// 	int middle = array_size/2;
+// 	int lb = 0;
+//     int ub = array_size - 1; // upper bound of search range
+// 
+// 	while (ub >= lb) {
+// 		if (value < int_array[middle]) {
+//             ub = middle - 1;
+// 			middle = lb + ( (ub - lb) / 2);
+// 		} else if (value > int_array[middle]) {
+// 		    lb = middle + 1;
+// 			middle = lb + ( (ub - lb) / 2);
+// 		} else {
+// 			return 1;
+// 		}
+// 	}
+// 	return -1;
+// }
+
+// The following is an alternative implementation of binary search
 int binarySearch(int value, int int_array[], int array_size)
 {
 	/*This finds the size of the array in bytes and divides by the number of bytes that each element in the array uses */
@@ -20,16 +42,19 @@ int binarySearch(int value, int int_array[], int array_size)
 	int lb = 0;
     int ub = array_size - 1; // upper bound of search range
 
-	while (ub >= lb) {
+	while (ub >= lb && value != int_array[middle]) {
 		if (value < int_array[middle]) {
             ub = middle - 1;
 			middle = lb + ( (ub - lb) / 2);
-		} else if (value > int_array[middle]) {
+		} else {
 		    lb = middle + 1;
 			middle = lb + ( (ub - lb) / 2);
-		} else {
-			return 1;
 		}
-	}
-	return -1;
+    }
+    if (value == int_array[middle]) {
+        return 1;
+    } else {
+        return -1;
+    }
 }
+
