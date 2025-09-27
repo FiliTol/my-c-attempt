@@ -7,6 +7,9 @@
 int getch(void);
 void ungetch(int);
 
+char buf[BUFFERSIZE];
+int bufp = 0;
+
 // Get next character or numeric operand
 // This function shall return a value that represents if the value in the input
 // is a number or not.
@@ -35,10 +38,17 @@ int getop(char s[])
     return NUMBER;
 }
 
-int getch(void) {
-
+int getch(void)
+{
+    return (bufp > 0) ? buf[--bufp] : getchar();
 }
 
+void ungetch(int c)
+{
+    if (bufp >= BUFFERSIZE) {
+        printf("ungetch: too many characters\n");
+    } else {
+        buf[bufp++] = c;
+    }
+}
 
-
-void ungetch(int);

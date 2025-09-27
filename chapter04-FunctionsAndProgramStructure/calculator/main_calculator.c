@@ -49,14 +49,3 @@ int main(void)
     return 0;
 }
 
-
-
-void push(double f) 
-{
-
-}
-
-double pop(void)
-{
-    return 0.0;
-}
