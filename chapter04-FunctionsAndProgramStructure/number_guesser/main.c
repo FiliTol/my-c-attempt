@@ -45,7 +45,7 @@ int pow_fn(int base, int power)
 void game(void)
 {
 	int rand_num = generate_random_number();
-	printf("A new number has been chosen: %d\n", rand_num);
+	printf("A new number has been chosen\n");
 	int ris;
 	int i = 0;
 	while ((ris = evaluate_number(rand_num)) != 1)
